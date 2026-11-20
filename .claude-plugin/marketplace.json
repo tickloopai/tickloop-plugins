@@ -1,0 +1,15 @@
+{
+  "name": "tickloop",
+  "owner": {
+    "name": "Tickloop",
+    "email": "support@tickloop.ai"
+  },
+  "description": "Plugins from Tickloop",
+  "plugins": [
+    {
+      "name": "tickloop-artifacts",
+      "source": "./plugins/tickloop-artifacts",
+      "description": "Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films kept in your Tickloop account, with the Skills to make them"
+    }
+  ]
+}

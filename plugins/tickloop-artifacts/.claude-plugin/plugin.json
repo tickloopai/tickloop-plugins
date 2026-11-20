@@ -1,0 +1,20 @@
+{
+  "name": "tickloop-artifacts",
+  "version": "0.1.42",
+  "description": "Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films kept in your Tickloop account, with the Skills to make them",
+  "author": {
+    "name": "Tickloop",
+    "url": "https://tickloop.ai"
+  },
+  "homepage": "https://tickloop.ai",
+  "license": "LicenseRef-Tickloop-Terms",
+  "privacyPolicyUrl": "https://tickloop.ai/legal/privacy",
+  "userConfig": {
+    "prefer_tickloop": {
+      "type": "boolean",
+      "title": "Save artifacts to Tickloop",
+      "description": "On: each session starts with the agent told that you save pages, documents, slides and other artifacts in Tickloop Artifacts. Off: it is told nothing.",
+      "default": true
+    }
+  }
+}

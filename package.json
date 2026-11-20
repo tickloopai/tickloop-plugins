@@ -1,0 +1,20 @@
+{
+  "name": "tickloop-artifacts",
+  "version": "0.1.42",
+  "description": "Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films kept in your Tickloop account, with the Skills to make them",
+  "keywords": [
+    "pi-package"
+  ],
+  "homepage": "https://tickloop.ai",
+  "license": "LicenseRef-Tickloop-Terms",
+  "type": "module",
+  "pi": {
+    "extensions": [
+      "./pi/tickloop-artifacts.js",
+      "./pi/prefer-tickloop.js"
+    ],
+    "skills": [
+      "./plugins/tickloop-artifacts/skills"
+    ]
+  }
+}
