@@ -20,5 +20,3 @@ Open the Tickloop artifact whose link or ID the user gave. The artifact belongs 
 ## Comments
 
 When the user asks to see the comments on it, call `ArtifactRead` with `action: "threads"`, the same `artifact_id` and `status: "all"`, and sum up each thread: who said what, and whether it is still open. Reply on a thread only when the user asks, with `ArtifactComment` with `action: "reply"`, its `thread_id` and the text.
-
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.

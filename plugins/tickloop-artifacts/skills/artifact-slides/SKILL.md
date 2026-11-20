@@ -122,5 +122,3 @@ Look at Slides only when the user asks to see them or to check how they look, ne
 ## The references
 
 Under `references/`: [the deck's files](references/deck-files.md) (files, design-system installs, changes, errors), [format](references/format.md), [fonts](references/fonts.md), [layout](references/layout.md), [images](references/images.md), [diagrams and charts](references/diagrams-and-charts.md), then [craft](references/craft.md).
-
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.

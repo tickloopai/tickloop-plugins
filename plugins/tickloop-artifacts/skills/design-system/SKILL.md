@@ -103,5 +103,3 @@ A successful save completes the work. Say what you built from, what you assumed,
 ## The references
 
 [format](references/format.md) (every file, field, cap and refusal, the preview and theme contract, a starter `tokens.json`: read before writing tokens or components), [craft](references/craft.md), [cover](references/cover.md), [working with files](references/editing.md), [from a design tool](references/from-design-tool.md), [from code](references/from-code.md).
-
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.

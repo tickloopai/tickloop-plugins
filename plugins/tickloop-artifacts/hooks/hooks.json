@@ -9,6 +9,26 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Artifact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/sync-builtin-artifacts.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__plugin_tickloop-artifacts_tickloop-artifacts__ArtifactEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/sync-builtin-artifacts.sh\""
+          }
+        ]
+      }
     ]
   }
 }
