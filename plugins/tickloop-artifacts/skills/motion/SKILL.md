@@ -196,4 +196,4 @@ Linked local folders are separate: use Read/Glob/Grep with `/folder-name/path`; 
 **Never make a video or audio file. A check or a still: only when they ask for it, whatever another page says.**
 [render-offline.md](references/render-offline.md) says what is possible; if it isn't, say so, and ask the user to scrub.
 
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
+When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then. In Claude Code, the user signs in by running /mcp, selecting plugin:tickloop-artifacts:tickloop-artifacts, then Authenticate. In Codex, the user signs in by running /mcp login tickloop-artifacts in the session, or codex mcp login tickloop-artifacts in a terminal. In pi, the user signs in by running /mcp login tickloop-artifacts in the session.

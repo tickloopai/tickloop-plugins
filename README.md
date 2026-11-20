@@ -33,7 +33,7 @@ The plugins Tickloop publishes for agents that install Claude-format plugins, th
 /plugin install tickloop-artifacts@tickloopai
 ```
 
-Sign in: the first time the agent uses a Tickloop Artifacts tool, it opens a browser for you to sign in to Tickloop. To sign in before that, run `/mcp`, select `plugin:tickloop-artifacts:tickloop-artifacts`, then "Authenticate".
+Sign in: run `/mcp`, select `plugin:tickloop-artifacts:tickloop-artifacts`, then "Authenticate", and sign in to Tickloop in the browser it opens. If you skip this, the agent asks you to sign in the first time it needs a Tickloop Artifacts tool.
 
 Check: `/mcp` shows `plugin:tickloop-artifacts:tickloop-artifacts` as connected.
 
@@ -60,7 +60,7 @@ codex plugin add tickloop-artifacts@tickloopai
 
 The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` text: trusting it keeps that setting on.
 
-Sign in: run `codex mcp login tickloop-artifacts` and sign in to Tickloop in the browser it opens.
+Sign in: in a Codex session, run `/mcp login tickloop-artifacts`; or, in a terminal, run `codex mcp login tickloop-artifacts`. Then sign in to Tickloop in the browser it opens.
 
 Check: `codex mcp list` shows `tickloop-artifacts` with Auth `OAuth`.
 

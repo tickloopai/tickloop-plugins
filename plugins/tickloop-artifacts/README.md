@@ -15,7 +15,7 @@ Tickloop Code and Tickloop Cloud include Tickloop Artifacts already, so they do 
 /plugin install tickloop-artifacts@tickloopai
 ```
 
-Sign in: the first time the agent uses a Tickloop Artifacts tool, it opens a browser for you to sign in to Tickloop. To sign in before that, run `/mcp`, select `plugin:tickloop-artifacts:tickloop-artifacts`, then "Authenticate".
+Sign in: run `/mcp`, select `plugin:tickloop-artifacts:tickloop-artifacts`, then "Authenticate", and sign in to Tickloop in the browser it opens. If you skip this, the agent asks you to sign in the first time it needs a Tickloop Artifacts tool.
 
 Check: `/mcp` shows `plugin:tickloop-artifacts:tickloop-artifacts` as connected.
 
@@ -42,7 +42,7 @@ codex plugin add tickloop-artifacts@tickloopai
 
 The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` text: trusting it keeps that setting on.
 
-Sign in: run `codex mcp login tickloop-artifacts` and sign in to Tickloop in the browser it opens.
+Sign in: in a Codex session, run `/mcp login tickloop-artifacts`; or, in a terminal, run `codex mcp login tickloop-artifacts`. Then sign in to Tickloop in the browser it opens.
 
 Check: `codex mcp list` shows `tickloop-artifacts` with Auth `OAuth`.
 
@@ -120,7 +120,7 @@ The plugin runs one program of its own: `hooks/prefer-tickloop.sh`, a shell scri
 
 ## The prefer_tickloop setting
 
-`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent two sentences of context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts, and that when its Tickloop Artifacts tools are missing or need sign-in, you want to be asked to sign in to Tickloop first, with nothing saved elsewhere until then. Every Skill the plugin ships ends with that second sentence too, whatever the setting, so it reaches the agent even where the hook does not run. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
+`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts, and that when its Tickloop Artifacts tools are missing or need sign-in, you want to be asked to sign in to Tickloop first, with nothing saved elsewhere until then, followed by the sign-in command of the agent it runs in. Every Skill the plugin ships ends with that sign-in request too, naming the commands of Claude Code, Codex and pi, whatever the setting, so it reaches the agent even where the hook does not run. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
 
 - Claude Code shows the setting when you enable the plugin. Change it with `/plugin configure tickloop-artifacts@tickloopai`.
 - Codex has no plugin settings. It asks you to review the hook before it runs: trusting the hook keeps the setting on. In Codex, not trusting the hook turns the setting off.
@@ -128,7 +128,7 @@ The plugin runs one program of its own: `hooks/prefer-tickloop.sh`, a shell scri
 
 If the hook does not run, for example in Codex when you have not trusted it, and you still want the agent to save artifacts to Tickloop by default, you can add this text yourself to the instructions every project reads: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code. The plugin does not add it for you.
 
-> The user has set pages, documents, slides and other artifacts generated for them to be saved in Tickloop Artifacts. When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
+> The user has set pages, documents, slides and other artifacts generated for them to be saved in Tickloop Artifacts. When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then. In Claude Code, the user signs in by running /mcp, selecting plugin:tickloop-artifacts:tickloop-artifacts, then Authenticate. In Codex, the user signs in by running /mcp login tickloop-artifacts in the session, or codex mcp login tickloop-artifacts in a terminal. In pi, the user signs in by running /mcp login tickloop-artifacts in the session.
 
 ## What it sends
 

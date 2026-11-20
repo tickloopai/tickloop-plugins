@@ -95,4 +95,4 @@ So base a fix on what your own run shows, in code and queries you write, never c
 
 To the person, this is their dashboard. Speak of it in their words, not of the store, its documents and datasets, or this guide.
 
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
+When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then. In Claude Code, the user signs in by running /mcp, selecting plugin:tickloop-artifacts:tickloop-artifacts, then Authenticate. In Codex, the user signs in by running /mcp login tickloop-artifacts in the session, or codex mcp login tickloop-artifacts in a terminal. In pi, the user signs in by running /mcp login tickloop-artifacts in the session.

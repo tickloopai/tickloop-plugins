@@ -124,4 +124,4 @@ it snap each slot to the nearest passing step. Structure and rules stay as writt
 | `references/palette.md` | **The reference palette instance** - every parameter, filled in; swap for your brand's |
 | `scripts/validate_palette.mjs` | Runnable six-checks validator (run it; don't eyeball) |
 
-When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
+When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then. In Claude Code, the user signs in by running /mcp, selecting plugin:tickloop-artifacts:tickloop-artifacts, then Authenticate. In Codex, the user signs in by running /mcp login tickloop-artifacts in the session, or codex mcp login tickloop-artifacts in a terminal. In pi, the user signs in by running /mcp login tickloop-artifacts in the session.

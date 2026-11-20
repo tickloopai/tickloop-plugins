@@ -35,7 +35,7 @@ Tickloop 为支持 Claude 格式插件的 Agent 发布的插件；同一个插�
 /plugin install tickloop-artifacts@tickloopai
 ```
 
-登录：Agent 第一次使用 Tickloop Artifacts 的工具时，会打开浏览器让你登录 Tickloop。想提前登录，运行 `/mcp`，选中 `plugin:tickloop-artifacts:tickloop-artifacts`，再选「Authenticate」。
+登录：运行 `/mcp`，选中 `plugin:tickloop-artifacts:tickloop-artifacts`，再选「Authenticate」，在打开的浏览器里登录 Tickloop。没有先登录的话，Agent 第一次需要 Tickloop Artifacts 的工具时会请你登录。
 
 确认：`/mcp` 显示 `plugin:tickloop-artifacts:tickloop-artifacts` 已连接（connected）。
 
@@ -64,7 +64,7 @@ codex plugin add tickloop-artifacts@tickloopai
 
 安装后第一次运行 Codex 时，它会请你信任插件的 SessionStart hook。这个 hook 把 `prefer_tickloop` 那段话告诉 Agent，信任它就会让这项设置保持开启。
 
-登录：运行 `codex mcp login tickloop-artifacts`，在它打开的浏览器里登录 Tickloop。
+登录：在 Codex 会话里运行 `/mcp login tickloop-artifacts`；或在终端运行 `codex mcp login tickloop-artifacts`。然后在打开的浏览器里登录 Tickloop。
 
 确认：`codex mcp list` 里 `tickloop-artifacts` 的 Auth 一栏显示 `OAuth`。
 
