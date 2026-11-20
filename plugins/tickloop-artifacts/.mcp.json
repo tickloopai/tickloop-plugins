@@ -2,7 +2,13 @@
   "mcpServers": {
     "tickloop-artifacts": {
       "type": "http",
-      "url": "https://tickloop.ai/artifacts/mcp"
+      "url": "https://tickloop.ai/artifacts/mcp",
+      "headers": {
+        "X-Tickloop-Plugin": "1"
+      },
+      "http_headers": {
+        "X-Tickloop-Plugin": "1"
+      }
     }
   }
 }

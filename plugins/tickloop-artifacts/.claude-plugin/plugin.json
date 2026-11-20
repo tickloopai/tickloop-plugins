@@ -1,6 +1,6 @@
 {
   "name": "tickloop-artifacts",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "description": "Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films kept in your Tickloop account, with the Skills to make them",
   "author": {
     "name": "Tickloop",
@@ -15,12 +15,6 @@
       "title": "Save artifacts to Tickloop",
       "description": "On: each session starts with the agent told that you save pages, documents, slides and other artifacts in Tickloop Artifacts. Off: it is told nothing.",
       "default": true
-    },
-    "sync_builtin_artifacts": {
-      "type": "boolean",
-      "title": "Sync published Artifact pages to Tickloop (experimental)",
-      "description": "On: each time the Artifact tool publishes an HTML page, the agent is asked to publish the same file to Tickloop Artifacts, which sends its content there, and to update that copy when the file is published again. Off: nothing is synced.",
-      "default": false
     }
   }
 }

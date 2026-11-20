@@ -1,3 +1,5 @@
+<!-- This repository is generated. -->
+
 # Tickloop Artifacts
 
 Tickloop Artifacts keeps the Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films an agent makes in your own Tickloop account. They open from a link, can be shared, and can be read and edited again from any agent signed in to the same Tickloop account. This plugin connects an agent to Tickloop Artifacts and adds the Skills for making each format.
@@ -6,53 +8,135 @@ Tickloop Code and Tickloop Cloud include Tickloop Artifacts already, so they do 
 
 ## Install
 
-Claude Code:
+### Claude Code
 
 ```
 /plugin marketplace add tickloopai/tickloop-plugins
-/plugin install tickloop-artifacts@tickloop
+/plugin install tickloop-artifacts@tickloopai
 ```
 
-Codex:
+Sign in: the first time the agent uses a Tickloop Artifacts tool, it opens a browser for you to sign in to Tickloop. To sign in before that, run `/mcp`, select `plugin:tickloop-artifacts:tickloop-artifacts`, then "Authenticate".
+
+Check: `/mcp` shows `plugin:tickloop-artifacts:tickloop-artifacts` as connected.
+
+Update: run `/plugin`, open Marketplaces, select `tickloopai` and choose "Enable auto-update"; Claude Code then updates the marketplace and its installed plugins each time it starts. To update by hand, run these in a terminal, then restart Claude Code:
+
+```
+claude plugin marketplace update tickloopai
+claude plugin update tickloop-artifacts@tickloopai
+```
+
+Uninstall:
+
+```
+/plugin uninstall tickloop-artifacts@tickloopai
+/plugin marketplace remove tickloopai
+```
+
+### Codex
 
 ```
 codex plugin marketplace add tickloopai/tickloop-plugins
-codex plugin add tickloop-artifacts@tickloop
+codex plugin add tickloop-artifacts@tickloopai
 ```
 
-The first time the agent uses a Tickloop Artifacts tool, it opens a browser for you to sign in to Tickloop. Each agent, and each of its configuration directories, signs in once and keeps the sign-in. A free Tickloop account can use every feature.
+The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` text: trusting it keeps that setting on.
+
+Sign in: run `codex mcp login tickloop-artifacts` and sign in to Tickloop in the browser it opens.
+
+Check: `codex mcp list` shows `tickloop-artifacts` with Auth `OAuth`.
+
+Update: refresh the marketplace, then add the plugin again to install its new version:
+
+```
+codex plugin marketplace upgrade tickloopai
+codex plugin add tickloop-artifacts@tickloopai
+```
+
+Uninstall:
+
+```
+codex plugin remove tickloop-artifacts@tickloopai
+codex plugin marketplace remove tickloopai
+```
+
+### pi
+
+pi installs the whole repository as a pi package:
+
+```
+pi install git:github.com/tickloopai/tickloop-plugins
+```
+
+Sign in: at the start of a session pi reports that `tickloop-artifacts` needs sign-in. Run `/mcp login tickloop-artifacts` in the session, or run `/mcp`, select the server, then "Sign in".
+
+Check: `/mcp` shows `tickloop-artifacts` as connected.
+
+Update: name the package, as `pi update` on its own updates only pi itself:
+
+```
+pi update git:github.com/tickloopai/tickloop-plugins
+```
+
+Uninstall:
+
+```
+pi remove git:github.com/tickloopai/tickloop-plugins
+```
+
+### Other agents
+
+For agents with no plugin format of their own, such as Cursor, Gemini CLI, OpenCode, GitHub Copilot and Windsurf, two cross-agent tools install the same Skills and server: [`skills`](https://github.com/vercel-labs/skills) copies the Skills into each agent's Skills folder, and [`add-mcp`](https://github.com/neon-solutions/add-mcp) adds `tickloop-artifacts` to each agent's MCP configuration. Each asks which of your agents to set up; `-a <agent>` names one, for example `-a cursor`. `skills` needs Node.js 22.20 or later.
+
+```
+npx skills add tickloopai/tickloop-plugins -g
+npx add-mcp https://tickloop.ai/artifacts/mcp -g --name tickloop-artifacts --header 'X-Tickloop-Plugin: 1'
+```
+
+Sign in: the first time the agent uses a Tickloop Artifacts tool, it signs you in to Tickloop with its own MCP sign-in, usually in a browser.
+
+Check: `npx skills list -g` lists the Skills, and `npx add-mcp list -g` lists `tickloop-artifacts` for each agent.
+
+Update: the server's address stays the same, so only the Skills need updating. This updates every Skill installed globally with `skills`:
+
+```
+npx skills update -g
+```
+
+Uninstall:
+
+```
+npx skills remove tickloopai/tickloop-plugins -g
+npx add-mcp remove tickloop-artifacts -g
+```
+
+These agents get no `prefer_tickloop` setting, as they share no hook that runs when a session starts. To have them save artifacts to Tickloop by default, add the text quoted in the plugin's README under "The prefer_tickloop setting" to the agent's own instructions.
+
+Each agent, and each of its configuration directories, signs in once and keeps the sign-in. A free Tickloop account can use every feature.
 
 ## What it runs
 
-The plugin runs two programs of its own, both shell scripts that open no network connection and touch no credentials:
-
-- `hooks/prefer-tickloop.sh`, which the agent runs when a session starts, resumes, clears or compacts (see "The prefer_tickloop setting"). It reads no files.
-- `hooks/sync-builtin-artifacts.sh`, which the agent runs after its own Artifact tool publishes and after this plugin's `ArtifactEdit` tool writes. While the experimental `sync_builtin_artifacts` setting is off, which is the default, it does nothing at all. While it is on, it reads the tool call the agent hands it and its own records in the plugin's data directory (see "The sync_builtin_artifacts setting"). It never reads the published file.
-
-The plugin declares one remote MCP server, `tickloop-artifacts` at https://tickloop.ai/artifacts/mcp, whose instructions and tool descriptions come from that server. Its Skills are Markdown instructions. The `open` Skill is the plugin's own; it takes an artifact's link or ID, reads the artifact and its comments through the MCP server, and waits for what to change. The other Skills are the ones Tickloop Code and Tickloop Cloud include; the `dataviz` Skill also holds a palette checker (`scripts/validate_palette.mjs`) that runs only when the agent runs it.
+The plugin runs one program of its own: `hooks/prefer-tickloop.sh`, a shell script the agent runs when a session starts, resumes, clears or compacts (see the next section). The script reads no files, opens no network connection and touches no credentials. pi runs two extensions from the repository root instead, inside pi: `pi/tickloop-artifacts.js` registers the MCP server below for each session, and `pi/prefer-tickloop.js` adds the text of the next section to each session's system prompt. They read no files, open no network connection and touch no credentials. The plugin declares one remote MCP server, `tickloop-artifacts` at https://tickloop.ai/artifacts/mcp, whose instructions and tool descriptions come from that server. Its Skills are Markdown instructions. The `open` Skill is the plugin's own; it takes an artifact's link or ID, reads the artifact and its comments through the MCP server, and waits for what to change. The other Skills are the ones Tickloop Code and Tickloop Cloud include; the `dataviz` Skill also holds a palette checker (`scripts/validate_palette.mjs`) that runs only when the agent runs it.
 
 ## The prefer_tickloop setting
 
-`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent one sentence of context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
+`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent two sentences of context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts, and that when its Tickloop Artifacts tools are missing or need sign-in, you want to be asked to sign in to Tickloop first, with nothing saved elsewhere until then. Every Skill the plugin ships ends with that second sentence too, whatever the setting, so it reaches the agent even where the hook does not run. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
 
-- Claude Code shows the setting when you enable the plugin. Change it with `/plugin configure tickloop-artifacts@tickloop`.
+- Claude Code shows the setting when you enable the plugin. Change it with `/plugin configure tickloop-artifacts@tickloopai`.
 - Codex has no plugin settings. It asks you to review the hook before it runs: trusting the hook keeps the setting on. In Codex, not trusting the hook turns the setting off.
+- pi gives the same text through `pi/prefer-tickloop.js` instead of the hook, in the system prompt of every session. Turn the setting off by disabling that extension under this package in `pi config`, which keeps the MCP server; `pi config --local` turns it off in one project only.
 
-## The sync_builtin_artifacts setting (experimental)
+If the hook does not run, for example in Codex when you have not trusted it, and you still want the agent to save artifacts to Tickloop by default, you can add this text yourself to the instructions every project reads: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code. The plugin does not add it for you.
 
-`sync_builtin_artifacts` ("Sync published Artifact pages to Tickloop") is off by default and works only in Claude Code; other agents never pass it, so there it stays off. **Turning it on sends the content of every HTML page you publish with Claude Code's own Artifact tool to Tickloop**: after each such publish, `hooks/sync-builtin-artifacts.sh` gives the agent the published file's path and asks it to publish the same file to Tickloop Artifacts and give you the link. The agent reads the file and sends it through this plugin's MCP server; the script itself never reads it.
-
-- The first publish of a file creates a Tickloop page. Publishing the same file again updates that page and creates no other.
-- A Tickloop page is one self-contained file, and it loads only the external files the `ArtifactEdit` tool's `create` description names. A page that loads other external libraries, or files beside it, is not synced: the agent tells you so and why, and does not change the page.
-- Turn it on or off with `/plugin configure tickloop-artifacts@tickloop`.
+> The user has set pages, documents, slides and other artifacts generated for them to be saved in Tickloop Artifacts. When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
 
 ## What it sends
 
-The agent sends requests through the MCP server's tools to https://tickloop.ai/artifacts/mcp, with its Tickloop sign-in: listing, reading, creating, updating and commenting on artifacts, including the content it writes into them. With `sync_builtin_artifacts` on, that includes the content of each HTML page published with the Artifact tool. The plugin sends nothing else, and nothing to anyone else.
+The agent sends requests through the MCP server's tools to https://tickloop.ai/artifacts/mcp, with its Tickloop sign-in: listing, reading, creating, updating and commenting on artifacts, including the content it writes into them. Each request also carries the header `X-Tickloop-Plugin: 1`, a fixed marker that tells the server this plugin's Skills are installed, so it names them when asked how to make an artifact; it is no credential, is the same for everyone and grants nothing. The plugin sends nothing else, and nothing to anyone else.
 
 ## What it writes
 
-The plugin writes nothing while `sync_builtin_artifacts` is off. While it is on, `hooks/sync-builtin-artifacts.sh` keeps two things in the plugin's data directory (`$CLAUDE_PLUGIN_DATA/sync/`): `sources.tsv`, one line per synced file with its path, its Tickloop page's ID and that page's revision, and `pending/`, the file each session was last asked to sync. Delete that directory to forget them. The agent keeps its Tickloop sign-in where it keeps the sign-in of any MCP server. Artifacts are stored in your Tickloop account.
+The plugin writes no files. In pi, the server is registered for each session only, never written to `~/.pi/agent/mcp.json` or any other file of yours. The agent keeps its Tickloop sign-in where it keeps the sign-in of any MCP server. Artifacts are stored in your Tickloop account.
 
 ## License
 
