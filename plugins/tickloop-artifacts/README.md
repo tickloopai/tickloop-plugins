@@ -31,7 +31,7 @@ codex plugin marketplace add tickloopai/tickloop-plugins
 codex plugin add tickloop-artifacts@tickloop
 ```
 
-The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` sentence: trusting it keeps that setting on.
+The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` text: trusting it keeps that setting on.
 
 Sign in: run `codex mcp login tickloop-artifacts` and sign in to Tickloop in the browser it opens.
 
@@ -82,25 +82,25 @@ npx skills remove tickloopai/tickloop-plugins -g
 npx add-mcp remove tickloop-artifacts -g
 ```
 
-These agents get no `prefer_tickloop` setting, as they share no hook that runs when a session starts. To have them save artifacts to Tickloop by default, add the sentence quoted in the plugin's README under "The prefer_tickloop setting" to the agent's own instructions.
+These agents get no `prefer_tickloop` setting, as they share no hook that runs when a session starts. To have them save artifacts to Tickloop by default, add the text quoted in the plugin's README under "The prefer_tickloop setting" to the agent's own instructions.
 
 Each agent, and each of its configuration directories, signs in once and keeps the sign-in. A free Tickloop account can use every feature.
 
 ## What it runs
 
-The plugin runs one program of its own: `hooks/prefer-tickloop.sh`, a shell script the agent runs when a session starts, resumes, clears or compacts (see the next section). The script reads no files, opens no network connection and touches no credentials. pi runs two extensions from the repository root instead, inside pi: `pi/tickloop-artifacts.js` registers the MCP server below for each session, and `pi/prefer-tickloop.js` adds the sentence of the next section to each session's system prompt. They read no files, open no network connection and touch no credentials. The plugin declares one remote MCP server, `tickloop-artifacts` at https://tickloop.ai/artifacts/mcp, whose instructions and tool descriptions come from that server. Its Skills are Markdown instructions. The `open` Skill is the plugin's own; it takes an artifact's link or ID, reads the artifact and its comments through the MCP server, and waits for what to change. The other Skills are the ones Tickloop Code and Tickloop Cloud include; the `dataviz` Skill also holds a palette checker (`scripts/validate_palette.mjs`) that runs only when the agent runs it.
+The plugin runs one program of its own: `hooks/prefer-tickloop.sh`, a shell script the agent runs when a session starts, resumes, clears or compacts (see the next section). The script reads no files, opens no network connection and touches no credentials. pi runs two extensions from the repository root instead, inside pi: `pi/tickloop-artifacts.js` registers the MCP server below for each session, and `pi/prefer-tickloop.js` adds the text of the next section to each session's system prompt. They read no files, open no network connection and touch no credentials. The plugin declares one remote MCP server, `tickloop-artifacts` at https://tickloop.ai/artifacts/mcp, whose instructions and tool descriptions come from that server. Its Skills are Markdown instructions. The `open` Skill is the plugin's own; it takes an artifact's link or ID, reads the artifact and its comments through the MCP server, and waits for what to change. The other Skills are the ones Tickloop Code and Tickloop Cloud include; the `dataviz` Skill also holds a palette checker (`scripts/validate_palette.mjs`) that runs only when the agent runs it.
 
 ## The prefer_tickloop setting
 
-`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent one sentence of context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
+`prefer_tickloop` ("Save artifacts to Tickloop") is on by default. While it is on, `hooks/prefer-tickloop.sh` gives the agent two sentences of context at the start of each session: that you have set pages, documents, slides and other artifacts generated for you to be saved in Tickloop Artifacts, and that when its Tickloop Artifacts tools are missing or need sign-in, you want to be asked to sign in to Tickloop first, with nothing saved elsewhere until then. Every Skill the plugin ships ends with that second sentence too, whatever the setting, so it reaches the agent even where the hook does not run. While it is off, the script prints nothing and the agent is told nothing. The plugin never edits your `CLAUDE.md`, `AGENTS.md` or permission settings.
 
 - Claude Code shows the setting when you enable the plugin. Change it with `/plugin configure tickloop-artifacts@tickloop`.
 - Codex has no plugin settings. It asks you to review the hook before it runs: trusting the hook keeps the setting on. In Codex, not trusting the hook turns the setting off.
-- pi gives the sentence through `pi/prefer-tickloop.js` instead of the hook, in the system prompt of every session. Turn the setting off by disabling that extension under this package in `pi config`, which keeps the MCP server; `pi config --local` turns it off in one project only.
+- pi gives the same text through `pi/prefer-tickloop.js` instead of the hook, in the system prompt of every session. Turn the setting off by disabling that extension under this package in `pi config`, which keeps the MCP server; `pi config --local` turns it off in one project only.
 
-If the hook does not run, for example in Codex when you have not trusted it, and you still want the agent to save artifacts to Tickloop by default, you can add this sentence yourself to the instructions every project reads: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code. The plugin does not add it for you.
+If the hook does not run, for example in Codex when you have not trusted it, and you still want the agent to save artifacts to Tickloop by default, you can add this text yourself to the instructions every project reads: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code. The plugin does not add it for you.
 
-> The user has set pages, documents, slides and other artifacts generated for them to be saved in Tickloop Artifacts.
+> The user has set pages, documents, slides and other artifacts generated for them to be saved in Tickloop Artifacts. When the Tickloop Artifacts tools are missing or need sign-in, the user wants to be asked first to sign in to Tickloop through the tickloop-artifacts MCP server, with nothing saved elsewhere until then.
 
 ## What it sends
 

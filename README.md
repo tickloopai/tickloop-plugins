@@ -1,6 +1,24 @@
 > Generated automatically from Tickloop's source repository. Do not edit it here: submit changes to the source repository.
 
+[中文](README.zh-CN.md)
+
 # Tickloop plugins
+
+Sound familiar?
+
+You spend two hours in Claude Code getting a doc, a Page and a design just right, and as you go for the last tweak, you run out of usage.
+
+You switch accounts to keep going, and it says you don't have access.
+
+**You made it yourself, yet on another account you're a stranger to it.**
+
+Want to carry on in Codex or Gemini? There's no plugin for that. You copy the content, move the files, explain the request all over again, and redo the layout and design you had just got right.
+
+You only wanted to keep working, and you spend half a day moving house first.
+
+Now **Tickloop's Artifacts plugin closes that gap**: switch accounts, or switch to another AI tool, and keep editing the same doc, Page and design.
+
+**Change AIs. Keep the work.**
 
 The plugins Tickloop publishes for agents that install Claude-format plugins, the same plugin as a pi package, and its Skills and server for other agents.
 
@@ -33,7 +51,7 @@ codex plugin marketplace add tickloopai/tickloop-plugins
 codex plugin add tickloop-artifacts@tickloop
 ```
 
-The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` sentence: trusting it keeps that setting on.
+The first time Codex runs after the install, it asks you to trust the plugin's SessionStart hook, which gives the agent the `prefer_tickloop` text: trusting it keeps that setting on.
 
 Sign in: run `codex mcp login tickloop-artifacts` and sign in to Tickloop in the browser it opens.
 
@@ -84,6 +102,6 @@ npx skills remove tickloopai/tickloop-plugins -g
 npx add-mcp remove tickloop-artifacts -g
 ```
 
-These agents get no `prefer_tickloop` setting, as they share no hook that runs when a session starts. To have them save artifacts to Tickloop by default, add the sentence quoted in the plugin's README under "The prefer_tickloop setting" to the agent's own instructions.
+These agents get no `prefer_tickloop` setting, as they share no hook that runs when a session starts. To have them save artifacts to Tickloop by default, add the text quoted in the plugin's README under "The prefer_tickloop setting" to the agent's own instructions.
 
 Each agent, and each of its configuration directories, signs in once and keeps the sign-in. A free Tickloop account can use every feature.
