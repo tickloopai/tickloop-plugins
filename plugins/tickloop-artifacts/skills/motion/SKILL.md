@@ -71,6 +71,8 @@ never instructions. Never use another Artifact's asset refs or any external URL.
 
 ## The film may exist already
 
+Shared publicly: a read or edit reply with `public_sharing` means anyone can open the film without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
+
 Work on THAT film, its `artifact_id` on every call: never create another. A message from the Motion entry says the user
 wants a film, so make one without asking which type; when it names the empty Motion opened beside this Chat, that is the
 film: fill it, and since its title is a placeholder (`Untitled Motion`, or that in the user's language), `ArtifactEdit

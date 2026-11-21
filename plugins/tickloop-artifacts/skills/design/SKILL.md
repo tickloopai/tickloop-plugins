@@ -92,6 +92,8 @@ keep the `<script src="./support.js"></script>` head line EXACTLY; `<html lang>`
 
 ## Revising a Design
 
+Shared publicly: a read or edit reply with `public_sharing` means anyone can open the Design without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
+
 A person or another Agent may have changed a file since you last saw it. Fine: a publish over their change is refused and names the file to re-read, so edit the files. Change only what the user asked for; keep other artboards, content and styling intact, and ask before adding sections.
 
 1. `ArtifactRead read` `project/canvas.json` first when you need an artboard's path or the layout changes (artboards, notes, pages, `launch`, the title, a design system); then in ONE message each artboard you must change plus the support files it uses. Learn the system already in use (tokens, fonts, frame sizes, spacing, component markup) and keep it unless the user asks for a change. Files you wrote in this Chat are current: work from your text and the hashes of the latest receipt instead of reading them back. ONLY when you change the look, or a design system is asked for: no `designSystems` record of it, or no `project/ds/<folder>/tokens.json` though it serves one: install it (Creating, step 4: every rule of it) in the same call.

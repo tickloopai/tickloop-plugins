@@ -11,7 +11,7 @@ Open the Tickloop artifact whose link or ID the user gave. The artifact belongs 
 1. Find the artifact ID in what the user gave:
    - An ID is 22 letters and digits, or a hyphenated UUID.
    - An artifact link has the ID right after `/artifacts/`, as in `https://tickloop.ai/artifacts/<id>`, `/artifacts/<id>/edit` and `/artifacts/embed/<id>`.
-   - A shared link (`/artifacts/s/...`) does not carry the ID. Ask the user for the artifact's own link.
+   - An old share link (`/artifacts/s/...`) does not carry the ID; opened in a browser, it leads to the artifact's own link. Ask the user for that link.
    - When the user gave neither, ask for the link or ID.
 2. Read it: call `ArtifactRead` with `action: "read"` and that `artifact_id`. When the result gives a `next_cursor`, pass it as `cursor` to read on until you have what you need to describe the artifact.
 3. Tell the user in a few lines what it is and where it stands: its title, its format, and what it holds now.

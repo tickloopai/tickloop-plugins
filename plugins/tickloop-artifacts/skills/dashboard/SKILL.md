@@ -83,6 +83,8 @@ If this Chat already created the dashboard, keep working in it: creating again m
 
 ## Changing one
 
+Shared publicly: a read or edit reply with `public_sharing` means anyone can open the dashboard without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
+
 Step 3 applies to a change too. Read `check` before it as well. A `failed` is yours to fix now, and its `at` tells the old page's report from the new one's. Before a fix, run the dataset's call yourself exactly as stored, if it only reads, and compare its columns, or a file's, with the ones the code reads. For a calc, read its `fn` and `inputs`. Change only what was asked.
 
 A new or changed query can change what a shared connector runs for everyone. Read [sources](references/sources.md) before you write a query, and before you make a file live, replace a file, keep one current or remove a source. Before you change a page that opens with `<meta name="dash-one-writer">`, however small the change, read [one-writer](references/one-writer.md): there a script's write outside a drawing is a fault, and an older copy of a file undoes what someone has saved since. No other stored page gets that line, a `data-draw` or `dash.draw`. A redesign or a new section also needs [design-defaults](references/design-defaults.md). Before you rebuild the dashboard in another product, read [exporting](references/exporting.md).

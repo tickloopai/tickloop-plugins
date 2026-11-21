@@ -24,7 +24,7 @@ The plugins Tickloop publishes for agents that install Claude-format plugins, th
 
 | Plugin | What it does |
 | --- | --- |
-| [`tickloop-artifacts`](plugins/tickloop-artifacts/README.md) | Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films kept in your Tickloop account, with the Skills to make them. |
+| [`tickloop-artifacts`](plugins/tickloop-artifacts/README.md) | Pages, Docs, Slides, Designs, Design systems, Data dashboards, Motion films and Sites kept in your Tickloop account, with the Skills to make them. |
 
 ## Claude Code
 

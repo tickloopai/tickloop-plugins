@@ -2,7 +2,7 @@
 
 # Tickloop Artifacts
 
-Tickloop Artifacts keeps the Pages, Docs, Slides, Designs, Design systems, Data dashboards and Motion films an agent makes in your own Tickloop account. They open from a link, can be shared, and can be read and edited again from any agent signed in to the same Tickloop account. This plugin connects an agent to Tickloop Artifacts and adds the Skills for making each format.
+Tickloop Artifacts keeps the Pages, Docs, Slides, Designs, Design systems, Data dashboards, Motion films and Sites an agent makes in your own Tickloop account. They open from a link, can be shared, and can be read and edited again from any agent signed in to the same Tickloop account. This plugin connects an agent to Tickloop Artifacts and adds the Skills for making each format.
 
 Tickloop Code and Tickloop Cloud include Tickloop Artifacts already, so they do not need this plugin.
 

@@ -47,6 +47,7 @@ The editor shows it as a section being written, with its intent; nobody edits it
 
 ## Editing an existing doc
 
+- Shared publicly: a read or edit reply with `public_sharing` means anyone can open the doc without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
 - Asked to add or expand sections of an existing doc → plant the plan first: one `ArtifactEdit patch` `insert` at the spot whose `text` is one pending block per new section, then fill each from that receipt's ids and hashes as after a create.
 - Change only what was asked; every other word stays. Patch the blocks the change touches by their `id` and `hash`, keep every other block and its `id`, and don't rewrite the document from the top. Replace a block in place rather than deleting and reinserting it: comment threads stay pinned to a block's `id`, and a dropped block detaches its threads.
 - What you wrote in this Chat is current: take block ids and hashes from your latest read or write receipt. If a save fails with `content_conflict`, someone saved while you worked: read again and fold their changes in, never overwrite them.

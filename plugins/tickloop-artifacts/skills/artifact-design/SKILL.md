@@ -77,6 +77,8 @@ Fundamentals below apply to everything. Follow the editorial process after them 
 
 ## Process
 
+Shared publicly: a read or edit reply with `public_sharing` means anyone can open the Page without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
+
 Start from what the viewer should be able to do on the page, in addition to what they will read. A Page keeps no state between visits and fetches nothing, so input it takes, filters and simulations work on the data embedded in it and are gone on reload; say so rather than imply they are saved.
 
 Before writing the page, settle a short design plan (a compact token system) and write it into the file itself, as the `:root` block at the top of the page's `<style>`, rather than into your reply:

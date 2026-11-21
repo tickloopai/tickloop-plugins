@@ -72,6 +72,8 @@ No tool that writes Artifacts: say so, give the files in chat. [Working with fil
 
 ## Revising a system
 
+Shared publicly: a read or edit reply with `public_sharing` means anyone can open the system without signing in. When its `version` is `latest`, ask the user before you change it, since they see the change at once.
+
 People edit live: start from what you just read, never from an older copy, and change only what was asked; a re-sync ([from a design tool](references/from-design-tool.md), [from code](references/from-code.md); `tokens.json` `meta.source` says which) included, file by file, never a rebuild.
 
 1. `read` `tokens.json` and, in the same message, each file you will change.

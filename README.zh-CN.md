@@ -24,7 +24,7 @@ Tickloop 为支持 Claude 格式插件的 Agent 发布的插件；同一个插�
 
 | 插件 | 用途 |
 | --- | --- |
-| [`tickloop-artifacts`](plugins/tickloop-artifacts/README.md) | 保存在你 Tickloop 账号里的 Page、Doc、Slides、Design、Design System、看板和 Motion 影片，以及制作它们的 Skills。 |
+| [`tickloop-artifacts`](plugins/tickloop-artifacts/README.md) | 保存在你 Tickloop 账号里的 Page、Doc、Slides、Design、Design System、看板、Motion 影片和 Site，以及制作它们的 Skills。 |
 
 ## Claude Code
 
