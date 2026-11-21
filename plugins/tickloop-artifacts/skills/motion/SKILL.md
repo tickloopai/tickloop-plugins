@@ -79,7 +79,8 @@ film: fill it, and since its title is a placeholder (`Untitled Motion`, or that 
 rename` it to the film's name before its first write. Only when no film exists yet, or when they also want it in another
 aspect ratio (a second film, never a resize), and only after the answer (step 2 below), make one `ArtifactEdit create`
 with `format: "motion"`, `title` set to the film's name (never "Video", "Motion" or "Untitled"), and no `content`. Every
-later call uses the receipt's `artifact_id`. Tell the user their video is being saved: name the beat, never the mechanism.
+later call uses the receipt's `artifact_id`. When they ask for their own copy of a film, make it without the questions, as
+"To duplicate an artifact" in the Artifacts tools' instructions says. Tell the user their video is being saved: name the beat, never the mechanism.
 
 ## A new film: three questions, then the film
 
@@ -159,7 +160,9 @@ Paths are `collection/doc_id`; names match `[A-Za-z0-9][A-Za-z0-9_.-]{0,63}`.
 
 - **`film/meta`** `{"v":1, "title":"…", "updatedAt":"…"}`.
 - **`assets/<file>`** `{"ref":"asset:<asset_id>", "mime":"image/webp", "w":1440, "h":900}`, one per image or font the cut
-  uses, 96 at most. `ref` is this film's own upload (its receipt's `ref`, verbatim) or a small `data:…;base64,` URI. An SVG is never uploaded: put its
+  uses, 96 at most. `ref` is this film's own upload (its receipt's `ref`, verbatim) or a small `data:…;base64,` URI. Another artifact's upload
+  doesn't load here, and a write holding one is refused: to duplicate a film, follow "To duplicate an artifact" in the Artifacts tools'
+  instructions. An SVG is never uploaded: put its
   markup in an html module. `mime` is required and exact, the upload receipt's `content_type` or the `data:` URI's own
   (`image/png|jpeg|gif|webp|svg+xml`, `font/woff2|woff|ttf|otf`, `video/mp4|webm`); missing or misspelt, the asset is
   silently dropped. There is no audio type. The cut reads an image as `kit.assets.url('<file>')` and places a clip with
