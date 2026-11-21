@@ -40,13 +40,4 @@ The service refuses a `tokens.json` that breaks a rule in [format](format.md) an
 
 ## Uploads from other clients
 
-A client without `ArtifactUploadAttachment` sends an image or font's raw bytes over HTTP with the bearer credential of the MCP endpoint, naming its path in the system:
-
-```
-POST <service base>/api/v1/artifacts/<artifact_id>/assets?operation_id=<uuid>&path=assets/Logos/mark.svg
-Authorization: Bearer <the MCP credential>
-Content-Type: image/svg+xml
-<raw file bytes>
-```
-
-The service base is the MCP endpoint without its final `/mcp`. `Content-Type` is `image/png`, `image/jpeg`, `image/gif`, `image/webp`, `image/svg+xml`, `font/woff2`, `font/woff`, `font/ttf` or `font/otf`; the service checks it against the file's bytes. Use a fresh `operation_id` for each file and reuse it only to retry that file. Uploading needs edit access. Never place the credential in a file, a comment or the chat.
+A client without `ArtifactUpload` and `ArtifactUploadAttachment` gets an address with `ArtifactUploadTicket` (the system's `artifact_id`, `files`, `bytes`) and sends each image or font from where it is, naming its path in the system: `python3 upload.py '<upload_url>' --file assets/Logos/mark.svg <file>` (or `node upload.mjs`, same arguments), or the ticket's `curl` line to `<upload_url>/file/assets/Logos/mark.svg`. PNG, JPEG, GIF, WebP and SVG images and WOFF2, WOFF, TTF and OTF fonts; the service checks each against its bytes, and a file over its limit is refused with `upload_too_large`. Uploading needs edit access. The artifact-design Skill's "Files you already hold" gives the details, and the ticket's `scripts` links the scripts when you do not have them.

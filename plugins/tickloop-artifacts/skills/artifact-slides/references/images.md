@@ -20,16 +20,9 @@ When you read a Slide's file, its `src` values are Artifact image refs or a desi
 - An image the user attached in the Chat carries a URI after its label, as in `[Attached image #1] URI: "tickloop://attachments/<id>"`: the `ArtifactUploadAttachment` host tool takes that URI as `attachment` with the deck's `artifact_id` and copies the image into the deck server side, so its bytes never pass through you and nothing is saved to a file first.
 - A local image file: the `ArtifactUpload` host tool takes `artifact_id` and a local `file_path`, reads the file under the same path rules and approvals as reading a file, and returns only `{asset_id, ref, content_type, bytes, width, height}`, never the image.
 - After a timeout either tool recovers its result by operation; if the outcome is still unknown, upload the file once more and use the `ref` that returns.
-- Other clients send the raw bytes over HTTP with the bearer credential of the MCP endpoint:
+- Without those tools (an app's MCP client), get an address with `ArtifactUploadTicket` (the deck's `artifact_id`, `files`, `bytes`) and send each image from where it is: `python3 upload.py '<upload_url>' --asset <file>` (or `node upload.mjs`, same arguments) prints its `ref`, as does the ticket's `curl` line; sending the same file again answers the same `ref`, and a file over its limit is refused with `upload_too_large`. The artifact-design Skill's "Files you already hold" gives the details, and the ticket's `scripts` links the scripts when you do not have them.
 
-```
-POST <service base>/api/v1/artifacts/<artifact_id>/assets?operation_id=<uuid>
-Authorization: Bearer <the MCP credential>
-Content-Type: image/png
-<raw file bytes>
-```
-
-The service base is the MCP endpoint without its final `/mcp`: for `<origin>/artifacts/mcp` it is `<origin>/artifacts`. `Content-Type` is `image/png`, `image/jpeg`, `image/gif`, `image/webp` or `image/svg+xml`; the service checks it against the file's bytes, and an SVG must be UTF-8 XML whose root element is `svg`. The response is `{asset_id, ref, content_type, bytes, sha256, width, height}`, with `width` and `height` in pixels or `null` when unknown. Use a fresh `operation_id` for each file and reuse it only to retry that file: a retry returns the original result, and different bytes under the same `operation_id` fail with `operation_conflict`. Uploading needs edit access. Each image is at most 5 MiB (2 MiB for SVG), and each deck holds at most 100 images and 100 MiB, beyond which uploads fail with `asset_limit`. Never place the credential in a Slide, a comment or the chat.
+Each image is PNG, JPEG, GIF, WebP or SVG, at most 5 MiB (2 MiB for SVG), and each deck holds at most 100 images and 100 MiB, beyond which uploads fail with `asset_limit`. Uploading needs edit access.
 
 The upload result does not describe the image: to know what it shows, look at the local file first when you can view images.
 

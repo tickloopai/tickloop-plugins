@@ -192,8 +192,9 @@ changed since, writes nothing and answers `content_conflict`: read it again and 
 `batch`. A write's receipt is the confirmation: don't read it back. A not-found answer means the wrong `artifact_id`: use the create receipt's.
 
 Assets: `ArtifactUpload` with the film's `artifact_id` and a local image or font `file_path` (no `path`), or
-`ArtifactUploadAttachment` with an image attached in the Chat (its `tickloop://attachments/<id>` URI as `attachment`). The
-receipt gives `ref` and `content_type`: copy them into the `assets` document. Its bytes never pass through you. Upload refused:
+`ArtifactUploadAttachment` with an image attached in the Chat (its `tickloop://attachments/<id>` URI as `attachment`), or,
+without those tools, `ArtifactUploadTicket` and `python3 upload.py '<upload_url>' --asset <file>` (or `node upload.mjs`); a file over its limit is
+refused with `upload_too_large`. The receipt gives `ref` and `content_type`: copy them into the `assets` document. Its bytes never pass through you. Upload refused:
 go on without that file and say which.
 
 Linked local folders are separate: use Read/Glob/Grep with `/folder-name/path`; never pass a local absolute path to an Artifact tool.
