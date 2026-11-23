@@ -1,6 +1,6 @@
 ---
 name: artifact-design
-description: Design guidance and fundamentals for Pages, with the Page contract every page must follow. Load before creating or substantially redesigning a page - visual explanations, comparisons, prototypes, interactive tools and dashboards. ArtifactRead quickstart with intent page returns this guidance and counts as loading it. Docs use the doc Skill, Slides use artifact-slides, and a Design (a canvas of several HTML boards kept as files) uses the design Skill.
+description: Design guidance and fundamentals for Pages, with the Page contract every page must follow. Load before creating or substantially redesigning a page - visual explanations, comparisons, prototypes, interactive tools and dashboards. ArtifactRead quickstart with intent page returns this guidance and counts as loading it. Docs use the doc Skill, Slides use artifact-slides, and a Design (a canvas of several HTML boards kept as files) uses the design Skill. Something to draw, map out, sketch or brainstorm is a Whiteboard and uses the whiteboard Skill.
 ---
 
 ## Page contract - read before your first save
