@@ -30,6 +30,9 @@ const SRCSET = /(\bsrcset\s*=\s*)(["'])([\s\S]*?)\2/gi;
 const CSS_URL = /(url\(\s*)(["']?)([^"')]*?)\2(\s*\))/gi;
 const ATTEMPTS = 3;
 const RETRY_DELAY_MS = 1000;
+// Some CDNs refuse a bare HTTP library's default User-Agent (Cloudflare error 1010); the script names itself instead,
+// without a Brand: every Brand serves these same bytes.
+const USER_AGENT = "artifacts-upload-script/1";
 
 class Refused extends Error {
   constructor(status, body) {
@@ -43,7 +46,7 @@ async function put(url, data) {
   for (let attempt = 0; ; attempt++) {
     let response;
     try {
-      response = await fetch(url, { method: "PUT", body: data });
+      response = await fetch(url, { method: "PUT", body: data, headers: { "user-agent": USER_AGENT } });
     } catch (error) {
       if (attempt === ATTEMPTS - 1) throw error;
       await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS * (1 + attempt)));

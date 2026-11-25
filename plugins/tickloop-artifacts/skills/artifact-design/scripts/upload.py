@@ -35,6 +35,9 @@ SRCSET = re.compile(r"""(\bsrcset\s*=\s*)(["'])(.*?)\2""", re.IGNORECASE | re.DO
 CSS_URL = re.compile(r"""(url\(\s*)(["']?)([^"')]*?)\2(\s*\))""", re.IGNORECASE)
 ATTEMPTS = 3
 RETRY_DELAY_SECONDS = 1
+# Some CDNs refuse a bare HTTP library's default User-Agent (Cloudflare error 1010); the script names itself instead,
+# without a Brand: every Brand serves these same bytes.
+USER_AGENT = "artifacts-upload-script/1"
 
 
 class Refused(Exception):
@@ -47,7 +50,7 @@ class Refused(Exception):
 def put(url, data):
     """PUTs data, retrying a broken connection: the same file sent again answers the same receipt."""
     for attempt in range(ATTEMPTS):
-        request = urllib.request.Request(url, data=data, method="PUT")
+        request = urllib.request.Request(url, data=data, method="PUT", headers={"User-Agent": USER_AGENT})
         try:
             with urllib.request.urlopen(request) as response:
                 return json.loads(response.read().decode("utf-8"))
