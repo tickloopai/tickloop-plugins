@@ -6,7 +6,7 @@ Read the doc with `ArtifactRead read` and identify the table block and current h
 {"op":"patch","artifact_id":"<artifact ID>","patches":[{"type":"setCell","target":"<table block ID>","expected_hash":"<hash from read>","row":1,"column":2,"text":"阿岚"}]}
 ```
 
-Both indexes start at zero. Count cells present in that row; a merged cell counts once. Identify the row by its content before using its index. On a conflict, read the table again, locate the intended row and cell, and retry with the fresh hash only if the edit still makes sense. Changes to column width, row height, fill, alignment, merged cells or the table’s width setting should survive a text edit. Use the rich table representation when the user actually requests a layout change. Rebuilding a table as pipes cannot represent all those settings.
+Both indexes start at zero. Count cells present in that row; a merged cell counts once. Identify the row by its content before using its index. On a conflict, read the table again, locate the intended row and cell, and retry with the fresh hash only if the edit still makes sense. Changes to column width, row height, fill, alignment, merged cells or the table’s width setting should survive a text edit. Use the rich table representation when the user actually requests a layout change. Rebuilding a table as pipes cannot represent all those settings. A table whose read carries `lossy: true` holds something even its Markdown cannot show (its `dropped` names it, or says `text`, `structure`, `all` or `unknown` when it cannot name a part): read it with `"block":"<table block ID>","as":"json"` to see every cell with its attributes before you change it.
 
 ## Dates and dropdown choices
 
