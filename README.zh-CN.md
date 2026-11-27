@@ -16,7 +16,7 @@
 
 只是想接着干活，结果先花半天搬家。
 
-现在，**Tickloop 的 Artifact 插件把这一步接上了**：换个账号，或换到另一个 AI 工具，都能继续修改同一份文档、Page 和设计。
+现在，**Tickloop 的作品插件把这一步接上了**：换个账号，或换到另一个 AI 工具，都能继续修改同一份文档、Page 和设计。
 
 **AI 可以换，做好的东西不用重来。**
 
@@ -35,7 +35,7 @@ Tickloop 为支持 Claude 格式插件的 Agent 发布的插件；同一个插�
 /plugin install tickloop-artifacts@tickloopai
 ```
 
-登录：运行 `/mcp`，选中 `plugin:tickloop-artifacts:tickloop-artifacts`，再选「Authenticate」，在打开的浏览器里登录 Tickloop。没有先登录的话，Agent 第一次需要 Tickloop Artifacts 的工具时会请你登录。
+登录：运行 `/mcp`，选中 `plugin:tickloop-artifacts:tickloop-artifacts`，再选「Authenticate」，在打开的浏览器里登录 Tickloop。没有先登录的话，Agent 第一次需要 Tickloop 作品的工具时会请你登录。
 
 确认：`/mcp` 显示 `plugin:tickloop-artifacts:tickloop-artifacts` 已连接（connected）。
 
@@ -117,7 +117,7 @@ npx skills add tickloopai/tickloop-plugins -g
 npx add-mcp https://tickloop.ai/artifacts/mcp -g --name tickloop-artifacts --header 'X-Tickloop-Plugin: 1'
 ```
 
-登录：Agent 第一次使用 Tickloop Artifacts 的工具时，会用它自己的 MCP 登录流程让你登录 Tickloop，通常在浏览器里完成。
+登录：Agent 第一次使用 Tickloop 作品的工具时，会用它自己的 MCP 登录流程让你登录 Tickloop，通常在浏览器里完成。
 
 确认：`npx skills list -g` 列出这些 Skills，`npx add-mcp list -g` 在每个 Agent 下列出 `tickloop-artifacts`。
 
@@ -134,6 +134,6 @@ npx skills remove tickloopai/tickloop-plugins -g
 npx add-mcp remove tickloop-artifacts -g
 ```
 
-这些 Agent 没有 `prefer_tickloop` 设置，因为它们没有共同的会话启动 hook。想让它们默认把 Artifact 保存到 Tickloop，可以把[插件 README](plugins/tickloop-artifacts/README.md)（英文）「The prefer_tickloop setting」一节引用的那段话，加进 Agent 自己的指令。
+这些 Agent 没有 `prefer_tickloop` 设置，因为它们没有共同的会话启动 hook。想让它们默认把作品保存到 Tickloop，可以把[插件 README](plugins/tickloop-artifacts/README.md)（英文）「The prefer_tickloop setting」一节引用的那段话，加进 Agent 自己的指令。
 
 每个 Agent，以及它的每个配置目录，只需登录一次，之后会保持登录。免费的 Tickloop 账号也能使用全部功能。
